@@ -130,3 +130,12 @@ OpenVPN Server needs to talk to FreeRadius for authenticating the openvpn client
 				Enter Auth Password:
 
 
+
+
+Reference:
+http://techlinux.net/2014/01/configuring-openvpn-to-authenticate-with-freeradius-part-1/
+http://techlinux.net/2014/01/configuring-openvpn-to-authenticate-with-freeradius-part-2/
+
+
+http://linuxdrops.com/install-openvpn-with-freeradius-on-centosrhel-5-or-6-part-2/
+http://sourceforge.net/projects/daloradius/
