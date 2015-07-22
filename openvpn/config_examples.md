@@ -367,4 +367,60 @@ persist-key
 
 ```
 
+7. Setting up the internet sharing  (private/secure intenet )
+
+a.
+
+In the openvpn server configuration, include the 
+        push "redirect-gateway def1"
+        push "dhcp-option DNS 10.8.0.1"
+
+
+server.conf
+```
+proto udp
+port 12000
+dev tun
+server 192.168.1.0 255.255.255.0
+ca /etc/certs/ca.crt
+cert /etc/certs/server.crt
+key /etc/certs/server.key
+dh  /etc/certs/dh2048.pem
+log /var/log/openvpn-server.log
+status /var/log/openvpn-server.status
+route-gateway 192.168.1.1
+push "dhcp-option 8.8.8.8"
+push "redirect-gateway def1"
+push "route-delay 5"
+keepalive 10 60
+persist-tun
+persist-key
+
+
+```
+
+b. enable ip forward in the openvpn server machine
+
+sudo sysctl -w net.ipv4.ip_forward=1
+
+Reference  :  
+http://askubuntu.com/questions/311053/how-to-make-ip-forwarding-permanent
+
+c.  configure the Firewall (iptables) to forward the traffic to internet
+
+    iptables -t nat -A POSTROUTING -s <tunnel subnet> -o <out interface> -j MASQUERADE
+
+    Ex:
+
+    iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE
+
+Ref: https://openvpn.net/index.php/open-source/documentation/howto.html#pki
+
+
+
+
+
+
+
+
 
