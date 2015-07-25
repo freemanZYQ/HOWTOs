@@ -418,6 +418,51 @@ Ref: https://openvpn.net/index.php/open-source/documentation/howto.html#pki
 
 
 
+8.configure without certs (client side - only username, password authentication)
+
+include this below line in the server conf
+	client-cert-not-required
+
+the complete server.conf is below
+```
+proto udp
+port 12000
+dev tun
+server 192.168.241.0 255.255.255.0
+ca /etc/certs/ca.crt
+cert /etc/certs/server.crt
+key /etc/certs/server.key
+dh  /etc/certs/dh2048.pem
+client-cert-not-required
+log /var/log/openvpn-server.log 
+status /var/log/openvpn-server.status  
+route-gateway 192.168.241.1
+push "dhcp-option 8.8.8.8"
+push "redirect-gateway def1"
+push "route-delay 5"
+plugin /etc/openvpn/radiusplugin.so /etc/openvpn/radiusplugin.cnf
+keepalive 10 60
+persist-tun
+persist-key
+```
+
+The client side conf is below,
+
+```
+client
+remote 52.27.225.192 
+proto udp
+port 12000
+dev tun
+ca /etc/certs/ca.crt
+keepalive 10 60
+auth-user-pass
+persist-tun
+persist-key
+
+```
+In the client side, no need  of certs, only "ca.crt" is required... auth-user-pass has been given hence username, password authenitcation happens
+
 
 
 
