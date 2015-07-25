@@ -463,7 +463,7 @@ persist-key
 ```
 In the client side, no need  of certs, only "ca.crt" is required... auth-user-pass has been given hence username, password authenitcation happens
 
-
+Reference :  https://networklessons.com/linux/openvpn-server-usernamepassword-authentication/
 
 
 
