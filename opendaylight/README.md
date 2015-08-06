@@ -1,19 +1,24 @@
 Opendaylight(ODL) setup & demo with mininet - stey by step guide
+================================================================
+
 ODL version :  Lithium
 mininet version : (git master branch)
 
 
 
 Setup : 
+------
 
-Host Machine (ODL controller)<-------------------->VM1(Mininet)
+Host Machine (ODL controller) <--------------------> VM1(Mininet)
 
 Host Machine :  
+
   Ubuntu 14.04 Desktop
   ODL Lithium version
   KVM interface IP : 192.168.122.1
 
 VM1:
+
   Ubuntu 14.04 Server
   Mininet (git master branch)
   IP: 192.168.122.3
@@ -29,10 +34,10 @@ ODL Installation (in Host machine)
 
 	karaf command prompt will open... now basic features to be installed as below,
 
+
    A. Base features... odl-l2switch-switch --L2 switch feature.. remaining feautres ..????
 
 	feature:install odl-base-all odl-aaa-authn odl-nsf-all odl-adsal-northbound odl-mdsal-apidocs odl-l2switch-switch
-
 
 	
    B. Enable the DLUX UI
@@ -45,12 +50,17 @@ ODL Installation (in Host machine)
         username/password - admin
 
    C.  Install the restconf feature - Nortbound APIs are accessible via REST API.
+
 	feature:install odl-restconf
+
+        REST API:
 	
 	http://localhost:8080/restconf/modules
-
 	http://localhost:8080/restconf/operational/network-topology:network-topology
+        http://localhost:8080/restconf/operational/opendaylight-inventory:nodes/
 
+Wireshark installation on Hostmachine:
+--------------------
 
 Install the latest stable wireshark from source (which has openflow protocol dissector inbuilt).
 
